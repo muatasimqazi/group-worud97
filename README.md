@@ -3,7 +3,7 @@
 **Group 8: Ben Celsi, Catherine Yoo, Ju An Oh, and Muatasim Qazi**
 
 Our team will be building several mini-games.
-Each team member will be making a different game. And we all will create single home page that provides links to these individual games. The users can choose which one to play. 
+Each team member will be making a different game. We all will create single home page that provides links to these individual games. Users can choose which game to play. 
 
 Here are the games we will each be building:
 
