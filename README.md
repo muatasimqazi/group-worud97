@@ -8,3 +8,4 @@ Each team member will be making a different game. And we will combine all these 
 ## Muatasim Qazi - Building a version of Parchís
 ## Catherine Yoo - Building a keyboard version of DDR 
 ## Ju An Oh - Building a mini ping pong game
+## Ben Celsi - Building a visually customizable version of "The Game of Life"
