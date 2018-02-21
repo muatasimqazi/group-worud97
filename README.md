@@ -10,7 +10,7 @@ Here are the games we will each be building:
 ## A web version of Parchís – Muatasim Qazi
 I will be building a web-based version of a game similar to Parchís called **Ludo**. The game is mostly played in the Indian sub-continent. The web version can be played by a single player or multiple players on different computers simultaneously.
 
-### Frameworks and Libraries
+**Frameworks and Libraries**
 * React
 * Firebase
 * Material-UI
