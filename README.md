@@ -1,6 +1,6 @@
 # group-worud97
 
-##Group 8: Ben Celsi, Catherine Yoo, Ju An Oh, and Muatasim Qazi
+**Group 8: Ben Celsi, Catherine Yoo, Ju An Oh, and Muatasim Qazi**
 
 Our team will be building several mini-games.
 Each team member will be making a different game. And we all will create single home page that provides links to these individual games. The users can choose which one to play. 
