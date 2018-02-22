@@ -6,13 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game of Life</title>
     <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
 </head>
 <body>
-
-    <div id="cells">
-
+    <div id = "container">
+        <div id = "cells">
+            <canvas width="750" height="750"></canvas>
+        </div>
+        <div id = "menu">
+            <button id = "step">Step</button>
+            <button id = "start">START</button>
+            <button id = "stop">STOP</button>
+            <button id = "random">RANDOM</button>
+            <button id = "clear">CLEAR</button>
+            <button id = "fill">FILL</button>
+            <input type = "checkbox" id="boundless" checked>Booundless Mode</input>
+            <div id = "rule">
+                    Outcomes based on number of neighbors:
+                <div id = "onrule"></div>
+                Outcomes based on number of neighbors:
+                <div id = "offrule"></div>
+            </div>
+        </div>
     </div>
-
     <script src="js/index.js"></script>
 </body>
 </html>

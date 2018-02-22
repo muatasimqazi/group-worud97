@@ -1,13 +1,35 @@
 .cell {
     color: blue;
-    height:20px;
-    width:20px;
 }
 
-.c1 {
-    background-color: red;
+#container{
+    display:flex;
+    flex-wrap: wrap;
+    border: 1px;
 }
 
-.c0 {
-    background-color: white   
+#cells {
+    flex-basis: 45%;
+    align-content: center;
+    background-color: yellow;
+}
+
+#menu {
+    flex-basis: 55%;
+    background-color: pink;
+}
+
+
+button{
+    border: 0px solid black;
+    background-color: white;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.rulebutton {
+    background-color: white;
+    height:30px;
+    width:30px;
+    padding:0;
 }
