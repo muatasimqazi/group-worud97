@@ -1,5 +1,5 @@
-let DIM = 100;
-let PIX = 5;
+let DIM = 200;
+let PIX = 3;
 let NDIS = 5
 let CAN = qs("canvas")
 let CTX = CAN.getContext("2d");
