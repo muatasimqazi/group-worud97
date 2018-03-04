@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Stage, Layer, Rect, Text } from 'react-konva';
+import { Rect } from 'react-konva';
 import Konva from 'konva';
 
 export default class Square extends React.Component {
@@ -21,6 +21,7 @@ export default class Square extends React.Component {
         fill={this.props.color}
         stroke={this.props.stroke}
         strokeWidth={this.props.strokeWidth}
+        draggable
       />
     );
   }
