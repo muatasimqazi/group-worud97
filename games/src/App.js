@@ -1,8 +1,9 @@
+//@ts-check
 import React, { Component } from 'react';
 import { HashRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
 import { ROUTES } from './constants';
-import LudoView from './Ludo';
-import PongView from './Pong';
+import LudoView from './components/Ludo/Ludo';
+import PongView from './components/Pong/Pong';
 import MainView from './Main'
 
 class App extends Component {
