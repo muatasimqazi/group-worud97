@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { HashRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
+import { ROUTES } from './constants';
+import LudoView from './Ludo';
+import PongView from './Pong';
+import MainView from './Main'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path={ROUTES.ludo} component={LudoView} />
+          <Route path={ROUTES.pong} component={PongView} />
+          <Route path={ROUTES.home} component={MainView} />
+          <Redirect to={ROUTES.home} />
+        </Switch>
+      </Router>
     );
   }
 }
