@@ -12,6 +12,18 @@ export default class Square extends React.Component {
     });
   };
   render() {
+    let shadow = {};
+    {
+      this.props.shadow ?
+      shadow = {
+        shadowColor: 'black',
+        shadowBlur: 10,
+        shadowOffset: { x: 10, y: 10 },
+        shadowOpacity: 0.5,
+      }
+      :
+      undefined
+    }
     return (
       <Rect
         x={this.props.x}
@@ -21,6 +33,10 @@ export default class Square extends React.Component {
         fill={this.props.color}
         stroke={this.props.stroke}
         strokeWidth={this.props.strokeWidth}
+        shadowColor={shadow.color}
+        shadowBlur={shadow.shadowBlur}
+        shadowOffset={shadow.shadowOffset}
+        shadowOpacity={shadow.shadowOpacity}
         draggable
       />
     );

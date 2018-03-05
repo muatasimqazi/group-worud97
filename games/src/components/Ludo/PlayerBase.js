@@ -30,6 +30,8 @@ class PlayerBase extends Component {
         </Group>
 
 
+
+
         {{
           1: (
             <Group>
@@ -51,7 +53,7 @@ class PlayerBase extends Component {
               <Square x={x - scale / 3} y={y + scale / 2} width={scale / 6} height={scale / 6} color={color} stroke="#ddd" strokeWidth={0.5} />
               <Square x={x - scale / 3} y={y + scale - (scale / 3)} width={scale / 6} height={scale / 6} color={color} stroke="#ddd" strokeWidth={0.5} />
               <Square x={x - scale / 3} y={y + scale - (scale / 6)} width={scale / 6} height={scale / 6} color={color} />
-              <StarShape x={x - (scale / 2) + 20} y={y + scale / 3 + 20} stroke={color} scale={scale / 2} color="#fff"  />
+              <StarShape x={x - (scale / 2) + 20} y={y + scale / 3 + 20} stroke={color} scale={scale / 2} color="#fff" />
             </Group>
           ),
 
@@ -63,7 +65,7 @@ class PlayerBase extends Component {
               <Square x={x + scale + (scale / 6)} y={y + scale / 2} width={scale / 6} height={scale / 6} color={color} stroke="#ddd" strokeWidth={0.5} />
               <Square x={x + scale + (scale / 6)} y={y + scale - (scale / 3)} width={scale / 6} height={scale / 6} color={color} stroke="#ddd" strokeWidth={0.5} />
               <Square x={x + scale} y={y + scale - (scale / 3)} width={scale / 6} height={scale / 6} color={color} stroke="#ddd" strokeWidth={0.5} />
-              <StarShape x={x + (scale) + (scale / 3) + 20} y={y + scale - (scale / 2) + 20} stroke={color} scale={scale / 2} color="#fff"  />
+              <StarShape x={x + (scale) + (scale / 3) + 20} y={y + scale - (scale / 2) + 20} stroke={color} scale={scale / 2} color="#fff" />
             </Group>
           ),
 
@@ -80,6 +82,13 @@ class PlayerBase extends Component {
           ),
 
         }[type]}
+
+        <Group>
+          <Square x={x + 40} y={y + 100} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
+          <Square x={(x + 160)} y={y} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
+          <Square x={x + 40} y={y + scale - scale / 6} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
+          <Square x={x} y={y + scale - scale / 6} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
+        </Group>
 
       </Group>
 
