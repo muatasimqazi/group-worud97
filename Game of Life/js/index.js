@@ -1,17 +1,46 @@
-let DIM = 200;
-let PIX = 3;
-let NDIS = 5
+let DIM = 125;
+let PIX = 4;
+let NBR_DIM = 4;
 let CAN = qs("canvas")
 let CTX = CAN.getContext("2d");
+let brushMode = 0;
+let brushModes = ["FILL", "CLEAR", "INVERT", "RANDOM"]
+let brushSize = 2;
+let brushSizes = ["SMALL", "MED", "LARGE"]
+let speed = 2
+let speeds = [300, 150, 0]
+let resolution = 2;
+let amounts = ["LO", "MED", "HI"]
 let grid = [];
 let timer = null;
 let boundless = true;
-let speed = 100;
+let delay = speeds[speed];
 let onColor = "blue";
 let offColor = "white"
 
 CAN.setAttribute("width", DIM*PIX + "px");
 CAN.setAttribute("height", DIM*PIX + "px");
+CAN.addEventListener("mousedown", function(e){
+    let x = Math.floor((e.pageX - CAN.offsetLeft)/PIX)
+    let y = Math.floor((e.pageY - CAN.offsetTop)/PIX)
+    console.log(x+ " " + y)
+    for (let i = x - brushSize; i <= x + brushSize; i++){
+        for (let j = y - brushSize; j <= y + brushSize; j++){
+            if (brushMode === 0) { //fill
+                setCell(i, j, 1)
+            } else if (brushMode === 1) { //clear
+                setCell(i, j, 0)
+            } else if (brushMode === 2) { //invert
+                setCell(i, j, (getCell(i, j) === 0)? 1 : 0)
+            } else { //random
+                setCell(i, j, Math.floor(2*Math.random()))
+            }
+        }
+    }
+    render();
+})
+qs("#menu").style.width = DIM*PIX + "px"
+qs("#menu").style.height = DIM*PIX + "px"
 
 function qs(q){
     return document.querySelector(q);
@@ -22,7 +51,7 @@ function mod(n, m) {
 }
 
 for (let y = 0; y < DIM; y++) {
-    let row = [];
+    let row = [];   
     for (let x = 0; x < DIM; x++) {    
         row[x] = [x, y, 0]
     };
@@ -45,7 +74,7 @@ function makeGrid(type){
 
 function getCell(x, y){
     if (boundless) {
-        return (grid [mod (y, DIM-1)] [mod(x, DIM-1)] [2]);
+        return (grid [mod (y, DIM)] [mod(x, DIM)] [2]);
     } else if (x >= 0 && x < DIM && y >= 0 && y < DIM) {
         return (grid [y] [x] [2]);
     } else {
@@ -62,7 +91,7 @@ function render() { //draw the contents of the grid onto a canvas
     CTX.clearRect(0, 0, DIM*PIX, DIM*PIX); //this should clear the canvas ahead of each redraw
     for (var y = 0; y < DIM; y++) { //iterate through rows
         for (var x = 0; x < DIM; x++) { //iterate through columns
-            if (getCell(x,y) >= 1) {
+            if (getCell(x, y) >= 1) {
                 CTX.fillStyle = onColor;
                 CTX.fillRect(x*PIX, y*PIX, PIX, PIX);
             }
@@ -183,18 +212,15 @@ makeRuleBtns(offRule);
 renderRuleBtns(onRule);
 renderRuleBtns(offRule);
 
-let NBRDIM = 5;
 function makeNbrBtns(){
-    for (let y = -NBRDIM; y <= NBRDIM; y++){
+    for (let y = -NBR_DIM; y <= NBR_DIM; y++){
         let row = document.createElement("div")
         row.classList.add("nbrRow")
-        for (let x = -NBRDIM; x <= NBRDIM; x++){
+        for (let x = -NBR_DIM; x <= NBR_DIM; x++){
             let btn = document.createElement("button")
             btn.id = "nbrx"+x+"y"+y;
             btn.classList.add("nbrBtn");
-            if (x === 0 && y === 0){
-                btn.textContent = "X";
-            } else {
+            if (x !== 0 || y !== 0){
                 btn.addEventListener("click", function (){
                     let nbrIndex = -1
                     for (let i = 0; i < nbrs.length; i++){
@@ -231,6 +257,7 @@ function renderNbrBtns(){
     for (let i = 0; i < nbrs.length; i++) {
         qs("#nbrx"+nbrs[i][0]+"y"+nbrs[i][1]).style.backgroundColor = "black";
     }
+    qs("#nbrx0y0").style.backgroundColor = onColor;
 }
 
 function removeNbrBtn(x,y){
@@ -245,28 +272,36 @@ function getNbrBtn(x,y){
 renderNbrBtns();
 let nbrNext = 0;
 
-document.onkeydown = function (e) {
-    var keyCode = e.keyCode;
-    if(e.keyCode == 50) {
-        setCell(50, 50, 1)
-    }
-    if(e.keyCode == 52) {
-        setCell(33, 76, 1)
-    }
-    render();
-};
 
-qs("#boundless").addEventListener("click", function (){
-        boundless = this.checked;});
+qs("#boundless").addEventListener("click", function () {
+    boundless = !boundless  
+    this.innerHTML = "Boundless <strong> " + ((boundless) ? "ON" : "OFF") + "</strong>"
+});
+
+
+qs("#brushMode").addEventListener("click", function () {
+    brushMode = mod(brushMode+1, brushModes.length)
+    this.innerHTML = "Brush Mode: <strong> " + brushModes[brushMode] + "</strong>"
+});
+
+
+qs("#speed").addEventListener("click", function () {
+    speed = mod(speed + 1, speeds.length);
+    delay = speeds[speed];
+    this.innerHTML = "Speed: <strong> " + amounts[speed] + "</strong>"
+    stop();
+    start();
+});
 
 qs("#step").addEventListener("click", function () {
     if (timer === null) {    
         step();}});
 
-qs("#start").addEventListener("click", function () {
-        if (timer === null) {
-            timer = setInterval(function() {
-                step();}, speed)}});
+qs("#start").addEventListener("click", start);
+function start(){
+    if (timer === null) {
+        timer = setInterval(function() {
+             step();}, delay)}}
 
 qs("#stop").addEventListener("click", stop);
 function stop(){
@@ -277,9 +312,7 @@ qs("#random").addEventListener("click", function (){
     makeGrid(2);});
     
 qs("#clear").addEventListener("click", function (){
-    stop();
     makeGrid(0);});
 
 qs("#fill").addEventListener("click", function (){
-    stop();
     makeGrid(1);});

@@ -10,28 +10,36 @@
 </head>
 <body>
     <div id = "container">
-        <div id = "cells">
-            <canvas width="750" height="750"></canvas>
-        </div>
+        
         <div id = "menu">
-            <button id = "step">STEP</button>
-            <button id = "start">START</button>
-            <button id = "stop">STOP</button>
-            <button id = "random">RANDOM</button>
-            <button id = "clear">CLEAR</button>
-            <button id = "fill">FILL</button>
-
-
-            <input type = "checkbox" id="boundless" checked>Boundless Mode</input>
-
-            
-            <div id = "nbrBtns"></div>
+            <div id = "buttons">
+                <button id = "start">START</button>
+                <button id = "stop">STOP</button>
+                <button id = "step">STEP</button>
+                <button id = "random">RANDOM</button>
+                <button id = "clear">CLEAR</button>
+                <button id = "fill">FILL</button>
+                <button id = "speed">Speed: <strong>MED</strong></button>
+                
+                <button id = "resolution">Resolution: <strong>HI</strong></button>
+                <button id = "boundless">Boundless: <strong>ON</strong></button>
+                <button id = "brushSize">Brush Size: <strong>MED</strong></button>
+                <button id = "brushMode">Brush Mode: <strong>FILL</strong></button>
+               
+            </div>
+            <div id = "neighbors">
+                Which cells are considered neighbors?
+                <div id = "nbrBtns"></div>
+            </div>
             <div id = "rule">
-                    Outcome of a living cell with X neighbors:
+                Outcome of a living cell with given # of neighbors:
                 <div id = "onrule"></div>
-                    Outcome of a dead cell with X neighbors:
+                Outcome of a dead cell with given # of neighbors:
                 <div id = "offrule"></div>
             </div>
+        </div>
+        <div id = "cells">
+                <canvas width="750" height="750"></canvas>
         </div>
     </div>
     <script src="js/index.js"></script>
