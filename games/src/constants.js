@@ -1,6 +1,6 @@
 export const ROUTES = {
     home: '/',
     ludo: '/ludo',
-    pong: '/pong',
+    guessing: '/guessing',
     main: '/games/:gameName',
 }

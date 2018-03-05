@@ -6,7 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { deepPurple500, amberA400 } from 'material-ui/styles/colors';
 import LudoView from './components/Ludo/Ludo';
-import PongView from './components/Pong/Pong';
+import GuessingGameView from './components/Guessing/GuessingGame';
 import MainView from './Main'
 import AppBarTop from './AppBarTop';
 import { Container } from 'react-grid-system';
@@ -29,7 +29,7 @@ class App extends Component {
             <Router>
               <Switch>
                 <Route exact path={ROUTES.ludo} component={LudoView} />
-                <Route path={ROUTES.pong} component={PongView} />
+                <Route path={ROUTES.guessing} component={GuessingGameView} />
                 <Route path={ROUTES.home} component={MainView} />
                 <Redirect to={ROUTES.home} />
               </Switch>
