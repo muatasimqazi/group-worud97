@@ -14,7 +14,7 @@ class PaperCard extends React.Component {
         return (
             <Paper style={style} zDepth={undefined}>
                 <div>
-                    <h1>{this.props.title}</h1>
+                    <h3>{this.props.title}</h3>
                     {this.props.children}
                 </div>
             </Paper>

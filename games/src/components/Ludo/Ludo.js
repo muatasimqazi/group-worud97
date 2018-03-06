@@ -1,11 +1,15 @@
 //@ts-check
 import React, { Component } from 'react';
+import PaperCard from '../../PaperCard';
+import { Row, Col } from 'react-grid-system';
 import PlayerBase from './PlayerBase';
 import { render } from 'react-dom';
-import { Stage, Layer, Rect, Text } from 'react-konva';
+import { Stage, Layer, Rect } from 'react-konva';
 import Konva from 'konva';
 import CenterSquare from './Center';
 import GridView from './Grid';
+import Border from './Border';
+
 
 const BASE_SCALE = 240
 const SCALE_INCREMENT = 4;
@@ -38,10 +42,23 @@ const BASES = [
 ];
 
 class LudoView extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            x: 40,
+            color: 'red'
+        }
+    }
+    handleClick() {
+        this.setState({
+            x: this.state.x + 40,
+            color: Konva.Util.getRandomColor()
+        })
+    }
     render() {
         let gridSize = GRID_UNIT;
-        let canvasHeight = window.innerHeight;
-        let canvasWidth = window.innerWidth;
+        let canvasHeight = 760;
+        let canvasWidth = 760;
 
         let gridSquares = [];
         for (var i = 0; i <= (canvasWidth / gridSize); i++) {
@@ -51,18 +68,31 @@ class LudoView extends Component {
 
         let playerBases = [];
         BASES.forEach((base, i) => {
-            playerBases.push(<PlayerBase key={i} x={base.x} y={base.y} width={BASE_SCALE} height={BASE_SCALE} color={base.color} type={base.type} scale={BASE_SCALE} scaleInc={SCALE_INCREMENT} />)
+            playerBases.push(<PlayerBase key={i} x={base.x + 40} y={base.y + 40} width={BASE_SCALE} height={BASE_SCALE} color={base.color} type={base.type} scale={BASE_SCALE} scaleInc={SCALE_INCREMENT} handleClick={() => this.handleClick()} newX={this.state.x}/>)
         })
         return (
-            <Stage width={360 * 4} height={360 * 4}>
-                <Layer>
-                    {gridSquares}
-                    <Text fontSize={20} padding={15} align="right" text="Welcome to the Ludo Game" />
-                    {playerBases}
-                    <CenterSquare x={BASE_SCALE + (GRID_UNIT * SCALE_INCREMENT) / 4} y={BASE_SCALE + GRID_UNIT * (SCALE_INCREMENT / 4)} width={GRID_UNIT} height={GRID_UNIT} />
+            <Row>
+                <Col sm={9}>
+                    <PaperCard title="Welcome to the Ludo Game">
+                        <Stage width={BASE_SCALE * 3 + 40} height={BASE_SCALE * 3 + 40} style={{marginLeft: 20, paddingBottom: 20}}>
+                            <Layer>
+                                {gridSquares}
+                                {playerBases}
+                                <CenterSquare x={BASE_SCALE + (GRID_UNIT * SCALE_INCREMENT) / 4} y={BASE_SCALE + GRID_UNIT * (SCALE_INCREMENT / 4)} width={GRID_UNIT} height={GRID_UNIT} />
+                                <Border x={0} y={0} width={80} height={760} color='#673ab0' opacity={0.9}/>
+                                <Border x={0} y={0} width={760} height={80} color='#673ab0' opacity={0.9}/>
+                                <Border x={680} y={0} width={80} height={760} color='#673ab0' opacity={0.9}/>
+                                <Border x={0} y={680} width={760} height={80} color='#673ab0' opacity={0.9}/>
 
-                </Layer>
-            </Stage>
+                            </Layer>
+                        </Stage>
+                    </PaperCard>
+                </Col>
+                <Col sm={3}>
+                    <PaperCard title="Dice Roll">
+                    </PaperCard>
+                </Col>
+            </Row>
         );
     }
 }

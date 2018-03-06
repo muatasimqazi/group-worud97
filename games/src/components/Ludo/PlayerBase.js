@@ -1,33 +1,48 @@
 //@ts-check
 import React, { Component } from 'react';
-import { Group } from 'react-konva';
+import { Group, Circle } from 'react-konva';
 import Square from './Square';
 import StarShape from './Star'
+import GamePiece from './GamePiece';
 
 class PlayerBase extends Component {
   render() {
-    let { x, y, type, scale, scaleInc, color } = this.props;
+    let { x, y, width, height, type, scale, scaleInc, color } = this.props;
     return (
       <Group>
 
         <Group>
           <Square x={x} y={y} width={this.props.width} height={this.props.height} color={color} />
-          <Square x={x + scale / 3} y={y + scale / 3} width={scale / 3} height={scale / 3} color="white" />
+          <Square x={x + scale / 6} y={y + scale / 6} width={width - 80} height={height - 80} color="white" />
         </Group>
 
         <Group>
-          <Square x={x} y={y} width={scale / 3} height={scale / 3} stroke="#ddd" strokeWidth={0.5} />
-          <Square x={(x + scale) - scale / 3} y={y} width={scale / 3} height={scale / 3} stroke="#ddd" strokeWidth={0.5} />
-          <Square x={x + scale - scale / 3} y={y + scale - scale / 3} width={scale / 3} height={scale / 3} stroke="#ddd" strokeWidth={0.5} />
-          <Square x={x} y={y + scale - scale / 3} width={scale / 3} height={scale / 3} stroke="#ddd" strokeWidth={0.5} />
+          <Square x={x + scale / 6} y={y + scale / 6} width={scale / 6} height={scale / 6} stroke="#ddd" strokeWidth={0.5} />
+          <Square x={(x + scale) - scale / 3} y={y + scale / 6} width={scale / 6} height={scale / 6} stroke="#ddd" strokeWidth={0.5} />
+          <Square x={x + scale / 6} y={y + scale - scale / 3} width={scale / 6} height={scale / 6} stroke="#ddd" strokeWidth={0.5} />
+          <Square x={x + scale - scale / 3} y={y + scale - scale / 3} width={scale / 6} height={scale / 6} stroke="#ddd" strokeWidth={0.5} />
         </Group>
 
         <Group>
+          {/*          
+          <Square x={x + 40} y={y + 100} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
+          <Square x={(x + 160)} y={y} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
+          <Square x={x + 40} y={y + scale - scale / 6} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
+          <Square x={x} y={y + scale - scale / 6} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} /> */}
+          <GamePiece x={x + scale / 6 + 18} y={y + scale / 6 + 18} fill={color} handleClick={this.props.handleClick} newX={this.props.newX}/>
+          <GamePiece x={(x + scale) - scale / 3 + 18} y={y + scale / 6 + 18} fill={color} />
+          <GamePiece x={x + scale - scale / 3 + 18} y={y + scale - scale / 3 + 18} fill={color} />
+          <GamePiece x={x + scale / 6 + 18} y={y + scale - scale / 3 + 18} fill={color} />
+
+        </Group>
+
+        {/* <Group>
+          
           <StarShape x={x + scaleInc + scale / 6} y={y + scaleInc + scale / 6} scale={scale} scaleInc={scaleInc} color="#fff" />
           <StarShape x={x + scale - 30} y={y + scale / 6} scale={scale} scaleInc={scaleInc} color="#fff" />
           <StarShape x={x + scale / 6} y={y + scale - scale / 6} scale={scale} scaleInc={scaleInc} color="#fff" />
           <StarShape x={x + scale - scale / 6} y={y + scale - scale / 6} scale={scale} scaleInc={scaleInc} color="#fff" />
-        </Group>
+        </Group> */}
 
 
 
@@ -83,12 +98,6 @@ class PlayerBase extends Component {
 
         }[type]}
 
-        <Group>
-          <Square x={x + 40} y={y + 100} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
-          <Square x={(x + 160)} y={y} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
-          <Square x={x + 40} y={y + scale - scale / 6} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
-          <Square x={x} y={y + scale - scale / 6} width={scale / 6} height={scale / 6} color={color} stroke="#fff" strokeWidth={3} shadow={true} />
-        </Group>
 
       </Group>
 

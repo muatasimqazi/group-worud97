@@ -12,32 +12,37 @@ export default class Square extends React.Component {
     });
   };
   render() {
+    let {x, y, width, height, color, stroke, strokeWidth, opacity } = this.props;
     let shadow = {};
     {
       this.props.shadow ?
-      shadow = {
-        shadowColor: 'black',
-        shadowBlur: 10,
-        shadowOffset: { x: 10, y: 10 },
-        shadowOpacity: 0.5,
-      }
-      :
-      undefined
+        shadow = {
+          shadowColor: 'black',
+          shadowBlur: 10,
+          shadowOffset: { x: 10, y: 10 },
+          shadowOpacity: 0.5,
+        }
+        :
+        undefined
     }
     return (
       <Rect
-        x={this.props.x}
-        y={this.props.y}
-        width={this.props.width}
-        height={this.props.height}
-        fill={this.props.color}
-        stroke={this.props.stroke}
-        strokeWidth={this.props.strokeWidth}
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        fill={color}
+        stroke={stroke}
+        strokeWidth={strokeWidth}
         shadowColor={shadow.color}
         shadowBlur={shadow.shadowBlur}
         shadowOffset={shadow.shadowOffset}
         shadowOpacity={shadow.shadowOpacity}
         draggable
+        opacity={opacity}
+
+        filters={([Konva.Filters.Kaleidoscope])}
+        kaleidoscopePower={3}
       />
     );
   }
