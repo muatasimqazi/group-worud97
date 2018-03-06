@@ -10,6 +10,7 @@ import GuessingGameView from './components/Guessing/GuessingGame';
 import MainView from './Main'
 import AppBarTop from './AppBarTop';
 import { Container } from 'react-grid-system';
+import TetrisView from './components/Tetris/TetrisView';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -30,6 +31,7 @@ class App extends Component {
               <Switch>
                 <Route exact path={ROUTES.ludo} component={LudoView} />
                 <Route path={ROUTES.guessing} component={GuessingGameView} />
+                <Route path={ROUTES.tetris} component={TetrisView} />
                 <Route path={ROUTES.home} component={MainView} />
                 <Redirect to={ROUTES.home} />
               </Switch>
