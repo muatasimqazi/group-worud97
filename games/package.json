@@ -3,20 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "blueimp-md5": "^2.10.0",
     "firebase": "^4.10.1",
+    "generic-dice": "^1.1.5",
+    "gh-pages": "^1.1.0",
     "konva": "^1.7.6",
     "material-ui": "^0.20.0",
     "react": "^16.2.0",
+    "react-dice": "^1.0.1",
+    "react-dice-complete": "^1.0.2",
     "react-dom": "^16.2.0",
     "react-grid-system": "^3.1.2",
     "react-konva": "^1.6.6",
+    "react-motion": "^0.5.2",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -a -e games",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "homepage": "https://muatasimqazi.github.io/group-worud97/games"
 }

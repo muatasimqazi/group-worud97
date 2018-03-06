@@ -1,68 +1,132 @@
 //@ts-check
 import React, { Component } from 'react';
-import PlayerBase from './PlayerBase';
-import { render } from 'react-dom';
-import { Stage, Layer, Rect, Text } from 'react-konva';
-import Konva from 'konva';
-import CenterSquare from './Center';
-import GridView from './Grid';
-
-const BASE_SCALE = 240
-const SCALE_INCREMENT = 4;
-const GRID_UNIT = 40;
-const BASES = [
-    {
-        color: '#C20C37',
-        x: 40,
-        y: 40,
-        type: 1,
-    },
-    {
-        color: '#17A269',
-        x: BASE_SCALE + GRID_UNIT * SCALE_INCREMENT,
-        y: 40,
-        type: 2,
-    },
-    {
-        color: '#1489BE',
-        x: 40,
-        y: BASE_SCALE + GRID_UNIT * SCALE_INCREMENT,
-        type: 3,
-    },
-    {
-        color: '#FED231',
-        x: BASE_SCALE + GRID_UNIT * SCALE_INCREMENT,
-        y: BASE_SCALE + GRID_UNIT * SCALE_INCREMENT,
-        type: 4,
-    }
-];
+import PaperCard from '../../PaperCard';
+import { Row, Col } from 'react-grid-system';
+import Board from './Board';
+import DiceRoll from './DiceRoll';
+import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
+import BaseSelectionChip from './BaseSelectionChip';
 
 class LudoView extends Component {
-    render() {
-        let gridSize = GRID_UNIT;
-        let canvasHeight = window.innerHeight;
-        let canvasWidth = window.innerWidth;
+    constructor(props) {
+        super(props);
+        this.state = {
+            isGame: false,
+            player: 'Your',
+            playerTurn: true,
+            message: 'Select your base!',
+            turn: '',
+            dice: 0,
+            moveX: 0,
+            chipColor: '',
+            labelColor: 'white',
+            computerBaseColor: 'green',
+            chipData: [
+                { key: 0, label: 'Red', color: '#C20C37' },
+                { key: 1, label: 'Green', color: '#17A269' },
+                { key: 2, label: 'Blue', color: '#1489BE' },
+                { key: 3, label: 'Yellow', color: '#FED231' },
+            ],
 
-        let gridSquares = [];
-        for (var i = 0; i <= (canvasWidth / gridSize); i++) {
-            gridSquares.push(<GridView key={i} points={[i * gridSize, 0, i * gridSize, canvasHeight]} stroke="#ddd" strokeWidth={1} />);
-            gridSquares.push(<GridView key={`${i}s`} points={[0, i * gridSize, canvasWidth, i * gridSize]} stroke="#ddd" strokeWidth={1} />);
         }
+    }
+    handleRollDice() {
+        this.rollDice()
+        setTimeout(this.rollDice.bind(this), 3000);
 
-        let playerBases = [];
-        BASES.forEach((base, i) => {
-            playerBases.push(<PlayerBase key={i} x={base.x} y={base.y} width={BASE_SCALE} height={BASE_SCALE} color={base.color} type={base.type} scale={BASE_SCALE} scaleInc={SCALE_INCREMENT} />)
+    }
+    rollDice() {
+        let randomValue = Math.floor(Math.random() * 6) + 1;
+        this.setState({ turn: `Dice Value: ${randomValue}` });
+        // setTimeout(() => this.setState({ turn: ':' }), 4000)
+        this.setState({
+            dice: randomValue,
+            playerTurn: !this.state.playerTurn,
+            player: 'Computer',
         })
-        return (
-            <Stage width={360 * 4} height={360 * 4}>
-                <Layer>
-                    {gridSquares}
-                    <Text fontSize={20} padding={15} align="right" text="Welcome to the Ludo Game" />
-                    {playerBases}
-                    <CenterSquare x={BASE_SCALE + (GRID_UNIT * SCALE_INCREMENT) / 4} y={BASE_SCALE + GRID_UNIT * (SCALE_INCREMENT / 4)} width={GRID_UNIT} height={GRID_UNIT} />
 
-                </Layer>
-            </Stage>
+    }
+
+
+    play() {
+        this.setState({
+            isGame: !this.state.isGame,
+            message: 'Select your base!',
+        })
+
+        this.state.isGame ? this.setState({
+            baseSelected: false,
+        }) : this.setState({
+            baseSelected: true,
+        });
+    }
+    handleGameSelection = (key) => {
+        this.chipData = this.state.chipData;
+        let randomNum = Math.floor(Math.random() * (key));
+        console.log(randomNum)
+        if (randomNum !== key && this.state.playerBaseColor !== this.state.computerBaseColor) {
+            this.setState({
+                computerBaseColor: this.chipData[randomNum].color,
+            })
+        } else {
+            this.setState({
+                computerBaseColor: this.chipData[2].color, // bug: need to be fixe
+            })
+        }
+        this.setState({
+            playerBaseColor: this.chipData[key].color,
+            baseSelected: true,
+            message: 'Click START GAME to begin!',
+        })
+        const chipsToChange = this.chipData.map((chip, i) => {
+
+            key !== i ? chip.newColor = '#e0e0e0' : chip.newColor = chip.color
+
+        })
+        this.setState({ chipData: this.state.chipData });
+
+    };
+
+    render() {
+
+        return (
+            <Row>
+                <Col sm={9}>
+                    <PaperCard>
+                        <Board {...this.props} isGame={this.state.isGame} />
+                    </PaperCard>
+                </Col>
+                <Col sm={3}>
+                    <PaperCard title="Welcome to the Ludo Game">
+                        <p>{this.state.message}</p>
+                        <BaseSelectionChip chipData={this.state.chipData} handleGameSelection={this.handleGameSelection} />
+                        <RaisedButton style={{ margin: "20px" }} disabled={!this.state.baseSelected} secondary={!this.state.isGame} label={!this.state.isGame ? "Start Game" : "Stop"} onClick={() => this.play()} />
+                        {
+                            this.state.baseSelected
+                                ?
+                                <div>
+                                    <div style={{ background: this.state.playerBaseColor, color: '#FFF', padding: 10 }}>Your Base Color</div>
+                                    <div style={{ background: this.state.computerBaseColor, color: '#FFF', padding: 10 }}>Computer Base Color</div>
+                                </div>
+                                :
+                                undefined
+                        }
+                    </PaperCard>
+                    <div>
+                        {
+                            this.state.isGame
+                                ?
+                                <div>
+                                    <PaperCard title={this.state.isGame && this.state.playerTurn ? `${this.state.turn}` : undefined}>
+                                        <DiceRoll handleRollDice={() => this.handleRollDice()} dice={this.state.dice} isGame={this.state.isGame} playerTurn={this.state.playerTurn} />
+                                    </PaperCard>
+                                </div>
+                                : undefined
+                        }
+                    </div>
+
+                </Col>
+            </Row>
         );
     }
 }

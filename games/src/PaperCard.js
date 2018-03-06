@@ -7,6 +7,7 @@ const style = {
     marginBottom: 30,
     boxShadow: '0 1px 15px 1px rgba(39,39,39,.1)',
     borderRadius: '.1875rem',
+    textAlign: 'center',
 };
 
 class PaperCard extends React.Component {
@@ -14,7 +15,7 @@ class PaperCard extends React.Component {
         return (
             <Paper style={style} zDepth={undefined}>
                 <div>
-                    <h1>{this.props.title}</h1>
+                    <h3>{this.props.title}</h3>
                     {this.props.children}
                 </div>
             </Paper>
