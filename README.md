@@ -17,6 +17,6 @@ I will be building a web-based version of a game similar to Parchís called **Lu
 * Animate.css
 
 
-## A keyboard version of DDR – Catherine Yoo
+## Tetris – Catherine Yoo
 ## A mini ping pong game – Ju An Oh
 ## A visually customizable version of "The Game of Life" – Ben Celsi
