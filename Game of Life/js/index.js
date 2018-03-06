@@ -1,19 +1,31 @@
-let DIM = 125;
+let DIM = 150;
 let PIX = 4;
-let NBR_DIM = 4;
+let NBR_DIM = 5;
 let CAN = qs("canvas")
 let CTX = CAN.getContext("2d");
+
 let brushMode = 0;
-let brushModes = ["FILL", "CLEAR", "INVERT", "RANDOM"]
 let brushSize = 2;
-let brushSizes = ["SMALL", "MED", "LARGE"]
-let speed = 2
-let speeds = [300, 150, 0]
-let resolution = 2;
-let amounts = ["LO", "MED", "HI"]
+let speed = 3
+let resolution = 3;
+let canvas = 2;
+let color = 0;
+
+let offRule = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+let onRule = [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+let nbrs = [[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1]];
+
+let boundless = true;
+let resolutions = [[60, 10],[75, 8], [100, 6], [150, 4], [300,2]] //600px
+let speeds = [400, 225, 150, 75, 0]
+let brushSizes = [0, 1, 3, 5, 10]
+let canvases = ["CLEAR", "FILL", "RANDOM", "CHECKERS", "STRIPES"]
+let brushModes = ["FILL", "CLEAR", "INVERT", "RANDOM"]
+let sizes = ["1", "2", "3", "4", "5"]
+let colors = ["BLUE", "GREEN", "YELLOW", "ORANGE", "RED", "PURPLE"]
+
 let grid = [];
 let timer = null;
-let boundless = true;
 let delay = speeds[speed];
 let onColor = "blue";
 let offColor = "white"
@@ -24,8 +36,9 @@ CAN.addEventListener("mousedown", function(e){
     let x = Math.floor((e.pageX - CAN.offsetLeft)/PIX)
     let y = Math.floor((e.pageY - CAN.offsetTop)/PIX)
     console.log(x+ " " + y)
-    for (let i = x - brushSize; i <= x + brushSize; i++){
-        for (let j = y - brushSize; j <= y + brushSize; j++){
+    setCell(x, y, 1)
+    for (let i = x - brushSizes[brushSize]; i <= x + brushSizes[brushSize]; i++){
+        for (let j = y - brushSizes[brushSize]; j <= y + brushSizes[brushSize]; j++){
             if (brushMode === 0) { //fill
                 setCell(i, j, 1)
             } else if (brushMode === 1) { //clear
@@ -50,26 +63,25 @@ function mod(n, m) {
     return ((n % m) + m) % m;
 }
 
-for (let y = 0; y < DIM; y++) {
-    let row = [];   
-    for (let x = 0; x < DIM; x++) {    
-        row[x] = [x, y, 0]
-    };
-    grid[y] = row
-}
-
-
-function makeGrid(type){
-    let val = type;
+function makeGrid(){
     for (let y = 0; y < DIM; y++) {
+        let row = [];   
         for (let x = 0; x < DIM; x++) {
-            if (type === 2){
-                val = (Math.floor(Math.random()*2))}
-            setCell(x, y, val);
-        }
+            let val = canvas;
+            if (canvas === 2) {
+                val = Math.floor(Math.random()*2)
+            } else if (canvas === 3) {
+                ((x-y) % 2 === 0)? val = 0 : val = 1
+            } else if (canvas === 4) {
+                (x % 2 === 0)? val = 0 : val = 1
+            }
+            row[x] = [x, y, val]
+        };
+        grid[y] = row
     }
     render();
-} makeGrid(2)
+} 
+makeGrid();
 
 
 function getCell(x, y){
@@ -126,8 +138,6 @@ function rule (cell) {
     }
 }
 
-let offRule = [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]//classic
-let onRule = [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 //let offRule = [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]//boxy
 //let onRule = [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
 //let offRule = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]//dotty
@@ -146,8 +156,7 @@ let onRule = [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 //let onRule = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 //let offRule = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]//empty
 //let onRule = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-let nbrs = [[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1]]; //classic
+ //classic
 //let nbrs = [[1,1],[1,-1],[-1,-1],[-1,1]]; //diagonals only
 //let nbrs = [[1,1],[1,-1],[-1,-1],[-1,1],[2,2],[2,-2],[-2,-2],[-2,2]]; //diagonal star
 //let nbrs = [[0,1],[0,-1],[0,2],[0,-2],[0,3],[0,-3]]; //line out
@@ -247,6 +256,7 @@ function makeNbrBtns(){
         qs("#nbrBtns").appendChild(row)
     }
 }
+
 makeNbrBtns();
 let q = [1,2,3,4,5,6,7]
 function renderNbrBtns(){
@@ -262,11 +272,6 @@ function renderNbrBtns(){
 
 function removeNbrBtn(x,y){
     let tmpNbrs = nbrs.slice();
-
-    
-}
-
-function getNbrBtn(x,y){
 }
 
 renderNbrBtns();
@@ -275,22 +280,52 @@ let nbrNext = 0;
 
 qs("#boundless").addEventListener("click", function () {
     boundless = !boundless  
-    this.innerHTML = "Boundless <strong> " + ((boundless) ? "ON" : "OFF") + "</strong>"
+    this.innerHTML = "<strong>Boundless: </strong> " + ((boundless) ? "ON" : "OFF")
 });
-
 
 qs("#brushMode").addEventListener("click", function () {
     brushMode = mod(brushMode+1, brushModes.length)
-    this.innerHTML = "Brush Mode: <strong> " + brushModes[brushMode] + "</strong>"
+    this.innerHTML = "<strong>Brush Mode: </strong> " + brushModes[brushMode]
 });
 
+qs("#brushSize").addEventListener("click", function () {
+    brushSize = mod(brushSize+1, brushSizes.length)
+    this.innerHTML = "<strong>Brush Size: </strong>" + sizes[brushSize]
+});
+
+qs("#canvas").addEventListener("click", function () {
+    canvas = mod(canvas+1, canvases.length)
+    stop();
+    makeGrid();
+    this.innerHTML = "<strong>Set Canvas: </strong>" + canvases[canvas]
+});
+
+qs("#color").addEventListener("click", function () {
+    color = mod(color+1, colors.length)
+    onColor = colors[color].toLowerCase()
+    render();
+    renderNbrBtns();
+    renderRuleBtns(onRule);
+    renderRuleBtns(offRule);
+    this.innerHTML = "<strong>Color: </strong>" + colors[color]
+});
+
+qs("#resolution").addEventListener("click", function () {
+    resolution = mod(resolution+1, resolutions.length)
+    DIM = resolutions[resolution][0]
+    PIX = resolutions[resolution][1]
+    makeGrid();
+    this.innerHTML = "<strong>Resolution: </strong>" + sizes[resolution]
+});
 
 qs("#speed").addEventListener("click", function () {
     speed = mod(speed + 1, speeds.length);
     delay = speeds[speed];
-    this.innerHTML = "Speed: <strong> " + amounts[speed] + "</strong>"
-    stop();
-    start();
+    if (timer != null) {   
+        stop();
+        start();
+    }
+    this.innerHTML = "<strong>Speed: </strong>" + sizes[speed]
 });
 
 qs("#step").addEventListener("click", function () {
@@ -307,12 +342,3 @@ qs("#stop").addEventListener("click", stop);
 function stop(){
     clearInterval(timer);
     timer = null;}
-
-qs("#random").addEventListener("click", function (){
-    makeGrid(2);});
-    
-qs("#clear").addEventListener("click", function (){
-    makeGrid(0);});
-
-qs("#fill").addEventListener("click", function (){
-    makeGrid(1);});
