@@ -19,9 +19,9 @@ export default class LeftDrawer extends React.Component {
             <Divider />
             <MenuItem containerElement={<Link to={ROUTES.guessing} />} onClick={this.props.handleToggle}>Guessing Game</MenuItem>
             <Divider />
-            <MenuItem>Tetris</MenuItem>
+            <MenuItem containerElement={<Link to={ROUTES.tetris} />} onClick={this.props.handleToggle}>Tetris</MenuItem>
             <Divider />
-            <MenuItem>Game of Life</MenuItem>
+            <MenuItem containerElement={<Link to={ROUTES.gameOfLife} />} onClick={this.props.handleToggle}>Game of Life</MenuItem>
           </Menu>
         </Drawer>
       </div>
