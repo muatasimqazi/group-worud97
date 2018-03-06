@@ -4,7 +4,7 @@ import { HashRouter as Router, Switch, Redirect, Route } from 'react-router-dom'
 import { ROUTES } from './constants';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { deepPurple500, amberA400 } from 'material-ui/styles/colors';
+import { indigo500, amberA400 } from 'material-ui/styles/colors';
 import LudoView from './components/Ludo/Ludo';
 import GuessingGameView from './components/Guessing/GuessingGame';
 import MainView from './Main'
@@ -13,7 +13,7 @@ import { Container } from 'react-grid-system';
 
 const muiTheme = getMuiTheme({
   palette: {
-    primary1Color: deepPurple500,
+    primary1Color: indigo500,
     accent1Color: '#ffa726',
     secondaryTextColor: '#000',
     alternateTextColor: '#FFF',

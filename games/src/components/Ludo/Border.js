@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Group } from 'react-konva';
 import Square from './Square';
 
 class Border extends Component {

@@ -7,6 +7,7 @@ const style = {
     marginBottom: 30,
     boxShadow: '0 1px 15px 1px rgba(39,39,39,.1)',
     borderRadius: '.1875rem',
+    textAlign: 'center',
 };
 
 class PaperCard extends React.Component {

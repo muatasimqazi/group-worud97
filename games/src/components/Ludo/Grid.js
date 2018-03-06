@@ -1,10 +1,6 @@
 //@ts-check
 import React, { Component } from 'react';
-import Square from './Square';
 import { Line } from 'react-konva';
-import Konva from 'konva';
-
-
 class GridView extends Component {
     render() {
         return (

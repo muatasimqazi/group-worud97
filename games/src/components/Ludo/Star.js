@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Star } from 'react-konva';
-import Konva from 'konva';
 class StarShape extends Component {
     render() {
         let { x, y, scale, color, stroke } = this.props;
