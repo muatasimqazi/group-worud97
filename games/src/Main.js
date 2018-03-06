@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-grid-system';
+import { Link } from 'react-router-dom';
 import PaperCard from './PaperCard';
+import { ROUTES } from './constants';
+import RaisedButton from 'material-ui/RaisedButton';
 class MainView extends Component {
     render() {
         return (
             <div>
                 <Row>
+                    <Col sm={12}>
+                        <PaperCard title="Game Three">
+                            <div style={{textAlign: "left"}}>
+                                <p>Our team built several mini-games. Each team member made a different game. Here's the home page for our games. Click on the a game name to PLAY.</p>
+                            </div>
+                        </PaperCard>
+                    </Col>
+                </Row>
+                <Row>
                     <Col sm={6}>
                         <PaperCard title="Game One">
                             <div>
-                                Ludo
-                    </div>
+                                <Link to={ROUTES.ludo}><RaisedButton primary={true} label="Ludo"></RaisedButton></Link>
+                                <p>Muatasim Qazi</p>
+                            </div>
                         </PaperCard>
                     </Col>
                     <Col sm={6}>
                         <PaperCard title="Game Two">
                             <div>
-                                Pong
-                    </div>
+                                <Link to={ROUTES.guessing}><RaisedButton secondary={true} label="Guessing Game"></RaisedButton></Link>
+                                <p>Ju An Oh</p>
+                            </div>
                         </PaperCard>
                     </Col>
                 </Row>
@@ -25,18 +39,22 @@ class MainView extends Component {
                     <Col sm={6}>
                         <PaperCard title="Game Three">
                             <div>
-                                Tetris
-                        </div>
+                                <Link to={ROUTES.tetris}><RaisedButton label="Tetris"></RaisedButton></Link>
+                                <p>Catherine Yoo</p>
+                            </div>
                         </PaperCard>
                     </Col>
                     <Col sm={6}>
                         <PaperCard title="Game Four">
                             <div>
-                                Game of Life
-                    </div>
+                                <Link to={ROUTES.gameOfLife}><RaisedButton primary={true} label="The Game of Life"></RaisedButton></Link>
+                                <p>Ben Celsi</p>
+
+                            </div>
                         </PaperCard>
                     </Col>
                 </Row>
+
             </div>
         );
     }

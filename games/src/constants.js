@@ -3,5 +3,6 @@ export const ROUTES = {
     ludo: '/ludo',
     guessing: '/guessing',
     tetris: '/tetris',
+    gameOfLife: '/gameoflife',
     main: '/games/:gameName',
 }
