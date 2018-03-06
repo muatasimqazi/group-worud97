@@ -1,6 +1,6 @@
 //@ts-check
 import React, { Component } from 'react';
-import { HashRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Redirect, Route} from 'react-router-dom';
 import { ROUTES } from './constants';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -23,19 +23,22 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
-          <AppBarTop />
-          <Container>
+         
+
             <Router>
+              <div>
+              <AppBarTop />
+              <Container>
               <Switch>
                 <Route exact path={ROUTES.ludo} component={LudoView} />
                 <Route path={ROUTES.guessing} component={GuessingGameView} />
                 <Route path={ROUTES.home} component={MainView} />
                 <Redirect to={ROUTES.home} />
               </Switch>
+              </Container>
+              </div>
             </Router>
-          </Container>
-        </div>
+          
       </MuiThemeProvider>
     );
   }
