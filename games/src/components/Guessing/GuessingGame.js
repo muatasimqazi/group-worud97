@@ -141,6 +141,7 @@ class GuessingGameView extends Component {
                 </audio>
                 <div align="center">
                   <h3>You Lost :'(</h3>
+                  <p>The anwer was: {this.state.randomNum}</p>
                 </div>
                 <div>
                   <img style={styles.imgStyles} src={youLost} alt="Ebichu from Ebichu" width="500" height="500" align="middle" />
