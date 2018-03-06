@@ -1,41 +1,43 @@
-#container{
-    display:flex;
-    flex-wrap: wrap;
-    border: 1px;
+body {
+    font-family: sans-serif;
+    font-size: 13pt;
+    align-content: center;
+    text-align: center;
 }
 
-#cells {
-    flex-basis: 45%;
-    align-content: center;
+
+#container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #menu {
-    flex-basis: 55%;
-    background-color: pink;
+    background-color: lightgray;
+    box-sizing: border-box;
+    align-content: center;
+    text-align: center;    
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 5px solid black;
 }
 
 button{
-    border: 0px solid black;
+    border: 2px solid black;
     background-color: white;
     cursor:pointer;
-    margin-top:10px;
-}
-
-.rulebutton {
-    height:30px;
-    width:30px;
-    padding:0;
+    margin-bottom:10px;
+    font-size: 13pt;
 }
 
 .nbrBtn {
-    
-    border: 2px solid black;
     height:20px;
     width:20px;
     padding:0;
     margin:0;
 }
 
-.nbrRow {
-    margin:0;
+#neighbors{
+    margin-bottom: 20px;
 }

@@ -9,29 +9,45 @@
     <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
 </head>
 <body>
+    <h1>THE GAME OF LIFE</h1>
+    <h5>Created by Ben Celsi   . . .   Inspired by John Conway</h5>
     <div id = "container">
         <div id = "cells">
-            <canvas width="750" height="750"></canvas>
+                <canvas width="750" height="750"></canvas>
         </div>
         <div id = "menu">
-            <button id = "step">STEP</button>
-            <button id = "start">START</button>
-            <button id = "stop">STOP</button>
-            <button id = "random">RANDOM</button>
-            <button id = "clear">CLEAR</button>
-            <button id = "fill">FILL</button>
-
-
-            <input type = "checkbox" id="boundless" checked>Boundless Mode</input>
-
-            
-            <div id = "nbrBtns"></div>
+           
+            <div id = "buttons">
+                <div>
+                    <button id = "start"><strong>START</strong></button>
+                    <button id = "stop"><strong>STOP</strong></button>
+                    <button id = "step"><strong>STEP</strong></button>
+                    
+                    <button id = "speed"><strong>Speed: </strong>4</button>
+                </div>
+                <div>
+                    <button id = "canvas"><strong>Set Canvas: </strong>RANDOM</button>
+                    <button id = "resolution"><strong>Resolution: </strong>4</button>
+                    <button id = "boundless"><strong>Boundless: </strong>ON</button>
+                </div>
+                <div>
+                    <button id = "brushSize"><strong>Brush Size: </strong>3</button>
+                    <button id = "brushMode"><strong>Brush Mode: </strong>FILL</button>
+                    <button id = "color"><strong>Color: </strong>BLUE</button>
+                </div>
+            </div>
+            <div id = "neighbors">
+                Which cells are considered neighbors?
+                <div id = "nbrBtns"></div>
+            </div>
             <div id = "rule">
-                    Outcome of a living cell with X neighbors:
+                Outcome of a living cell with given # of neighbors:
                 <div id = "onrule"></div>
-                    Outcome of a dead cell with X neighbors:
+                Outcome of a dead cell with given # of neighbors:
                 <div id = "offrule"></div>
             </div>
+            <br>
+            <strong>EPILEPSY WARNING: MAY INVOLVE FLASHING LIGHTS</strong>
         </div>
     </div>
     <script src="js/index.js"></script>
