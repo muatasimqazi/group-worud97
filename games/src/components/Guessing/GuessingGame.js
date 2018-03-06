@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
-import question from "./img/question_mark.jpeg"
-import youLost from "./img/youLost.gif"
-import youWon from "./img/youWon.gif"
+import question from "./img/question_mark.jpeg";
+import youLost from "./img/youLost.gif";
+import youWon from "./img/youWon.gif";
+import PaperCard from "../../PaperCard";
+import up from "./img/up.jpg";
+import down from "./img/down.png";
+import Warning from "./img/warning.gif";
+import RaisedButton from 'material-ui/RaisedButton';
 
-let imgStyles = {
-    width: "80%",
-    height: "auto",
+const styles = {
+  imgStyles: {
+    width: "50%",
+    height: "300px",
     display: "block",
     margin: "0 auto"
+  },
+
+  inputStyle: {
+    padding: "20px"
+  },
+  inputBoxStyle: {
+    height: "30",
+    padding: "10px"
+  }
+
 }
 
 class GuessingGameView extends Component {
@@ -15,10 +31,11 @@ class GuessingGameView extends Component {
     super();
     this.state = {
       randomNum: 0,
-      guessInput:'',
-      guessLeft:10,
+      guessInput: '',
+      guessLeft: 10,
       lastGuess: -1,
-      img: question
+      img: question,
+      play: true
     }
   }
   generateRandomNumber() {
@@ -34,13 +51,14 @@ class GuessingGameView extends Component {
   }
 
   handlePlayAgain(e) {
-      this.setState({
-          guessInput: '',
-          randomNum: this.generateRandomNumber(),
-          guessLeft: 10,
-          lastGuess: -1,
-          img: question
-      })
+    this.setState({
+      guessInput: '',
+      randomNum: this.generateRandomNumber(),
+      guessLeft: 10,
+      lastGuess: -1,
+      img: question,
+      message: ''
+    })
   }
 
   decreaseValue = () => {
@@ -49,6 +67,9 @@ class GuessingGameView extends Component {
       lastGuess: parseInt(this.state.guessInput),
       guessInput: ''
     });
+    let audio = new Audio();
+    audio.src = "./music/button.wav"
+    audio.play();
     this.displayMessage();
   }
 
@@ -58,16 +79,18 @@ class GuessingGameView extends Component {
     let max = 100;
     if (userGuess > max || userGuess < min) {
       this.setState({
-        message: 'Please Guess a number between 0 to 100'
-        
+        message: 'Please Guess a number between 0 to 100',
+        img: Warning
       });
     } else if (userGuess > this.state.randomNum) {
       this.setState({
-        message: "The number is Lower, Try again."
+        message: "The number is Lower, Try again.",
+        img: down
       });
     } else if (userGuess < this.state.randomNum) {
       this.setState({
-        message: "The number is Higher, Try again."
+        message: "The number is Higher, Try again.",
+        img: up
       });
     }
   }
@@ -77,74 +100,75 @@ class GuessingGameView extends Component {
       randomNum: this.generateRandomNumber()
     })
   }
-  
+
   render() {
     return (
+
       <div>
-          {this.state.randomNum}
-          {this.state.lastGuess}
-         {(this.state.guessLeft > 0 && this.state.lastGuess !== this.state.randomNum) ? 
-         <div>
-            <h3 className="container p-3">
-                Guess a Number between 0 and 100.
+        <PaperCard title="GuessingGame">
+            {(this.state.guessLeft > 0 && this.state.lastGuess !== this.state.randomNum) ?
+              <div align="center" style={styles.inputStyle}>
+                <h3>
+                  Guess a Number between 0 and 100.
             </h3>
-            <h4 className="container p-4">
-                {this.state.message}
-            </h4>
-            <div>
-                <img style={imgStyles} src={this.state.img} alt="question mark from the pexels" width="500" height="500" align="middle"/>
-            </div>
-
-            <div className="pl-4 pt-4">
-                guessLeft: {this.state.guessLeft}
-            </div>
-
-            <div className="pl-4 pt-2">
-                Your Guess?
-            </div>
-
-            <div className="col-4">
-            <form className="form-group d-flex">
-            <input id="guess" type="text" className="form-control"
-            placeholder="Guess Here" value={this.state.guessInput}
-            onInput={evt => this.setState({ guessInput: evt.target.value})}
-            />
-            <button className="btn btn-secondary" onClick={this.decreaseValue} disabled={this.state.guessLeft === 0}>
-                Submit
-            </button>
-            </form>
-            </div>
-        </div> : (this.state.guessLeft === 0 ? <div>
-            <div className="d-flex justify-content-center">
-                <h3 className="p-3">You Lost :'(</h3>
-            </div>
-            <div className="pb-2">
-            <img style={imgStyles} src={youLost} alt="Ebichu from Ebichu" width="500" height="500" align="middle"/>
-            </div>
-            <div className="pl-4">
-            <button className="btn btn-secondary" onClick={evt => this.handlePlayAgain()}>
-                Play again?
-            </button>
-            </div>
-            </div> : 
-            <div>
-                <div className="d-flex justify-content-center">
-                    <h3 className="p-3">You Won!!</h3>
+                <h4>
+                  {this.state.message}
+                </h4>
+                <div>
+                  <img style={styles.imgStyles} src={this.state.img} alt="question mark from the pexels" width="500" height="500" align="middle" />
                 </div>
-                <div className="pb-2">
-                    <img style={imgStyles} src={youWon} alt="Leonardo DiCaprio" width="500" height="500" align="middle"/>
+
+                <div style={styles.inputStyle}>
+                  guessLeft: {this.state.guessLeft}
                 </div>
-                <div className="pl-4">
-                <button className="btn btn-secondary" onClick={evt => this.handlePlayAgain()}>
-                    Play again?
-                </button>
-                </div> 
-            </div>   
-            )}
+
+                <div style={styles.inputStyle}>
+                  Your Guess?
+            </div>
+
+                <div style={styles.inputStyle}>
+                <form onSubmit={this.decreaseValue}>
+                    <input style={styles.inputBoxStyle} id="guess" type="text"
+                      placeholder="Guess Here" value={this.state.guessInput}
+                      onInput={evt => this.setState({ guessInput: evt.target.value })}
+                    />
+                    <RaisedButton label="Submit" secondary={true} onClick={this.decreaseValue}/>
+                  </form>
+                </div>
+              </div> : (this.state.guessLeft === 0 ? <div>
+                <audio id="myAudio" autoPlay={this.state.play}>
+                  <source src='./music/Baby_Cry_Long.mp3' type="audio/mp3"/>
+                </audio>
+                <div align="center">
+                  <h3>You Lost :'(</h3>
+                </div>
+                <div>
+                  <img style={styles.imgStyles} src={youLost} alt="Ebichu from Ebichu" width="500" height="500" align="middle" />
+                </div>
+                <div>
+                  <RaisedButton label="Play Again?" secondary={true} onClick={evt => this.handlePlayAgain()} />
+                </div>
+              </div> :
+                <div>
+                  <audio id="myAudio" autoPlay={this.state.play}>
+                    <source src='./music/Applause+sound+effect.mp3' type="audio/mp3"/>
+                  </audio>
+                  <div align="center">
+                    <h3>You Won!!</h3>
+                  </div>
+                  <div>
+                    <img style={styles.imgStyles} src={youWon} alt="Leonardo DiCaprio" width="500" height="500" align="middle" />
+                  </div>
+                  <div>
+                    <RaisedButton label="Play Again?" secondary={true} onClick={evt => this.handlePlayAgain()} />
+                  </div>
+                </div>
+              )}
+        </PaperCard>
       </div>
-      
-    );
-  }
-}
 
+        );
+      }
+    }
+    
 export default GuessingGameView;
