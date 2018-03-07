@@ -47,7 +47,7 @@ class MainView extends Component {
                     <Col sm={6}>
                         <PaperCard title="Game Four">
                             <div>
-                                <a href="/group-worud97/games/gameOfLife"><RaisedButton primary={true} label="The Game of Life"></RaisedButton></a>
+                                <a href="/group-worud97/games/gameoflife"><RaisedButton primary={true} label="The Game of Life"></RaisedButton></a>
                                 <p>Ben Celsi</p>
 
                             </div>
