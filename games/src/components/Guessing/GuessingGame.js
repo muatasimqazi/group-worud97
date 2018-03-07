@@ -132,7 +132,7 @@ class GuessingGameView extends Component {
                       placeholder="Guess Here" value={this.state.guessInput}
                       onInput={evt => this.setState({ guessInput: evt.target.value })}
                     />
-                    <RaisedButton label="Submit" secondary={true} onClick={this.decreaseValue}/>
+                    <RaisedButton label="Submit" type="submit" secondary={true}/>
                   </form>
                 </div>
               </div> : (this.state.guessLeft === 0 ? <div>
@@ -140,13 +140,16 @@ class GuessingGameView extends Component {
                   <source src='./music/Baby_Cry_Long.mp3' type="audio/mp3"/>
                 </audio>
                 <div align="center">
-                  <h3>You Lost :'(</h3>
+                  <h3>
+                    You Lost 😭
+                  </h3>
                   <p>The anwer was: {this.state.randomNum}</p>
                 </div>
                 <div>
                   <img style={styles.imgStyles} src={youLost} alt="Ebichu from Ebichu" width="500" height="500" align="middle" />
                 </div>
                 <div>
+                  <br/>
                   <RaisedButton label="Play Again?" secondary={true} onClick={evt => this.handlePlayAgain()} />
                 </div>
               </div> :
@@ -161,6 +164,7 @@ class GuessingGameView extends Component {
                     <img style={styles.imgStyles} src={youWon} alt="Leonardo DiCaprio" width="500" height="500" align="middle" />
                   </div>
                   <div>
+                    <br/>
                     <RaisedButton label="Play Again?" secondary={true} onClick={evt => this.handlePlayAgain()} />
                   </div>
                 </div>
