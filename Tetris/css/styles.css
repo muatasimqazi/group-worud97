@@ -11,9 +11,13 @@ button {
 #canvas { 
     display: inline-block; 
     vertical-align: top; 
+    margin: 10px;
     border: 1px solid #333; 
     width: 300px; 
     height: 600px;
+}
+#start {
+    font-size: 2em;
 }
 #menu { 
     display: inline-block; 
