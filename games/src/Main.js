@@ -39,7 +39,7 @@ class MainView extends Component {
                     <Col sm={6}>
                         <PaperCard title="Game Three">
                             <div>
-                                <a href="/tetris"><RaisedButton label="Tetris"></RaisedButton></Link>
+                                <a href="/group-worud97/games/tetris"><RaisedButton label="Tetris"></RaisedButton></a>
                                 <p>Catherine Yoo</p>
                             </div>
                         </PaperCard>
@@ -47,7 +47,7 @@ class MainView extends Component {
                     <Col sm={6}>
                         <PaperCard title="Game Four">
                             <div>
-                                <Link href="/gameOfLife"><RaisedButton primary={true} label="The Game of Life"></RaisedButton></Link>
+                                <a href="/group-worud97/games/gameOfLife"><RaisedButton primary={true} label="The Game of Life"></RaisedButton></a>
                                 <p>Ben Celsi</p>
 
                             </div>
