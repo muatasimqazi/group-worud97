@@ -12,7 +12,7 @@ class MainView extends Component {
                     <Col sm={12}>
                         <PaperCard title="Game Three">
                             <div style={{textAlign: "left"}}>
-                                <p>Our team built several mini-games. Each team member made a different game. Here's the home page for our games. Click on the a game name to PLAY.</p>
+                                <p>Our team built several mini-games. Each team member made a different game. Here's the home page for our games. Click on a game name to PLAY.</p>
                             </div>
                         </PaperCard>
                     </Col>
@@ -39,7 +39,7 @@ class MainView extends Component {
                     <Col sm={6}>
                         <PaperCard title="Game Three">
                             <div>
-                                <Link to={ROUTES.tetris}><RaisedButton label="Tetris"></RaisedButton></Link>
+                                <a href="/tetris"><RaisedButton label="Tetris"></RaisedButton></Link>
                                 <p>Catherine Yoo</p>
                             </div>
                         </PaperCard>
@@ -47,7 +47,7 @@ class MainView extends Component {
                     <Col sm={6}>
                         <PaperCard title="Game Four">
                             <div>
-                                <Link to={ROUTES.gameOfLife}><RaisedButton primary={true} label="The Game of Life"></RaisedButton></Link>
+                                <Link href="/gameOfLife"><RaisedButton primary={true} label="The Game of Life"></RaisedButton></Link>
                                 <p>Ben Celsi</p>
 
                             </div>
