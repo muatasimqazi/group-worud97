@@ -40,3 +40,17 @@ button {
 #time { 
     color: blue; 
 }
+
+nav {
+    background-color: #3f51b5;
+    text-align: left;
+    
+}
+nav .brand-logo {
+    margin-left: 20px;
+}
+nav svg {
+    height: 2rem;
+    fill: currentColor;
+    margin: 15px;
+}
