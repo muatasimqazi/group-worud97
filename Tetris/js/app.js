@@ -62,6 +62,7 @@ function renderTetro() {
     return {type: type, dir: DIR.UP, x: Math.round(random(0, width - type.size)), y: 0};
 }
 
+//This specific function is from the source code
 function eachblock(type, x, y, dir, fn) {
     let bit, result, lines = 0, col = 0, blocks = type.blocks[dir];
     for(bit = 0x8000; bit > 0; bit = bit >> 1) {
@@ -275,9 +276,9 @@ function drop() {
 
 function clearLines() {
     let x, y, complete, n = 0;
-    for(y = height; y > 0 ; --y) {
+    for(y = height; y > 0; y--) {
         complete = true;
-        for(x = 0 ; x < width ; ++x) {
+        for(x = 0; x < width; x++) {
             if (!getBlock(x, y)) {
                 complete = false;
             }
@@ -288,16 +289,16 @@ function clearLines() {
             n++;
         }
         if (n > 0) {
-        setLines(lines + n); 
-        score += (100 * Math.pow(2, n-1)); 
+            setLines(lines + n); 
+            score += (100 * Math.pow(2, n-1)); 
         }
     }
 }
 
 function clearLine(n) {
     let x, y;
-    for(y = n ; y >= 0 ; --y) {
-        for(x = 0 ; x < width ; ++x)
+    for(y = n; y >= 0 ; y--) {
+        for(x = 0; x < width; x++)
         setBlock(x, y, (y == 0) ? null : getBlock(x, y-1));
     }
 }
@@ -320,12 +321,12 @@ function drawBoard() {
             drawTetro(CTX, current.type, current.x, current.y, current.dir);
         }
         let x, y, block;
-        for(y = 0 ; y < height; y++) {
-            for (x = 0 ; x < width ; x++) {
+        for (y = 0; y < height; y++) {
+            for (x = 0; x < width; x++) {
                 if (block = getBlock(x,y)) {
-                CTX.fillStyle = block.color;
-                CTX.fillRect(x*dx, y*dy, dx, dy);
-                CTX.strokeRect(x*dx, y*dy, dx, dy);
+                    CTX.fillStyle = block.color;
+                    CTX.fillRect(x*dx, y*dy, dx, dy);
+                    CTX.strokeRect(x*dx, y*dy, dx, dy);
                 }
             }
         }
