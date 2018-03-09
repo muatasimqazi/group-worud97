@@ -30,6 +30,14 @@ let delay = speeds[speed];
 let onColor = "blue";
 let offColor = "white"
 
+document.querySelector("#toggle-drawer").addEventListener("click", function() {
+    document.body.classList.toggle("drawer-open");
+});
+
+document.querySelector("#content").addEventListener("click", function() {
+    document.body.classList.remove("drawer-open");
+});
+
 CAN.setAttribute("width", DIM*PIX + "px");
 CAN.setAttribute("height", DIM*PIX + "px");
 CAN.addEventListener("mousedown", function(e){
