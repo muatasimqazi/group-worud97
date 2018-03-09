@@ -54,3 +54,46 @@ nav svg {
     fill: currentColor;
     margin: 15px;
 }
+
+nav a {
+    font-family: Roboto, sans-serif;
+}
+
+#drawer {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 257px;
+    height: 100vh;
+    z-index: 1;
+    color: rgb(0, 0, 0.87);
+    background-color: rgb(255, 255, 255);
+    transform: translateX(-300px);
+}
+
+#name {
+    color: black;
+    padding-left: 15px;
+    margin-top: 0px; 
+    margin-bottom: 0px; 
+}
+
+hr {
+    padding: 0px;
+    color: #EAE6E6;
+    margin-top: 0px; 
+    margin-bottom: 0px; 
+}
+
+#drawer, 
+.content {
+    transition: all 500ms;
+}
+
+.drawer-open #drawer {
+    transform: translateX(0);
+}
+
+.drawer-open .content {
+    transform: translateX(300px);
+}
