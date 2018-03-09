@@ -1,6 +1,15 @@
 // https://codeincomplete.com/posts/javascript-tetris/
 
 "use strict";
+
+document.querySelector("#toggle-drawer").addEventListener("click", function() {
+    document.body.classList.toggle("drawer-open");
+});
+
+document.querySelector("#content").addEventListener("click", function() {
+    document.body.classList.remove("drawer-open");
+});
+
 const TIME_SPAN = document.querySelector("#time");
 const CANVAS = document.getElementById("canvas");
 const CTX = CANVAS.getContext("2d");
