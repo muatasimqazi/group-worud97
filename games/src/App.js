@@ -33,7 +33,6 @@ class App extends Component {
               <Switch>
                 <Route exact path={ROUTES.ludo} component={Game} />
                 <Route path={ROUTES.guessing} component={GuessingGameView} />
-                <Route path={ROUTES.tetris} component={TetrisView} />
                 <Route path={ROUTES.home} component={MainView} />
                 <Redirect to={ROUTES.home} />
               </Switch>
