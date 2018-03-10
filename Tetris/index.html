@@ -13,43 +13,69 @@
 </head>
 
 <body class="body">
-    <nav id="drawer">
-        <a id="name" href="/group-worud97/games/#/ludo">Ludo</a>
-        <hr>
-        <a id="name" href="/group-worud97/games/#/guessing">Guessing Game</a>
-        <hr>
-        <a id="name" href="/group-worud97/games/tetris">Tetris</a>
-        <hr>
-        <a id="name" href="/group-worud97/games/gameoflife">Game of Life</a>
-    </nav>
     <nav>
         <div class="nav-wrapper">
-            <svg id="toggle-drawer" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg data-activates="slide-out" class="button-collapse" id="toggle-drawer" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
             </svg>
-            <a href="/group-worud97/games" class="brand-logo">Play Games</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <a href="/group-worud97/games/#" class="brand-logo">Play Games</a>
+
+            <ul id="slide-out" class="side-nav left-align">
                 <li>
-
+                    <a href="/group-worud97/games/#/ludo">Ludo</a>
                 </li>
-
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li>
+                    <a href="/group-worud97/games/#/guessing">Guessing Game</a>
+                </li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li>
+                    <a href="/group-worud97/games/tetris">Tetris</a>
+                </li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li>
+                    <a href="/group-worud97/games/gameoflife">Game of Life</a>
+                </li>
             </ul>
         </div>
     </nav>
-    <div id="content">
-        <div id="tetris">
-            <div id="menu">
-                <p id="text">
-                    <button id="start">Start!!! 😆</button>
-                </p>
-                <p>Score: </p>
-                <p id="score">00000</p>
-                <p>Time: </p>
-                <p id="time">0 min 0 sec</p>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <h5 class="center-align">Play Tetris</h5>
+                        <hr>
+                        <div id="content">
+                            <div id="tetris">
+                                <div id="menu">
+                                    <p id="text">
+                                        <button id="start">Start!!! 😆</button>
+                                    </p>
+                                    <p>Score: </p>
+                                    <p id="score">00000</p>
+                                    <p>Time: </p>
+                                    <p id="time">0 min 0 sec</p>
+                                </div>
+                                <canvas id="canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <canvas id="canvas"></canvas>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 
