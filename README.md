@@ -1,3 +1,7 @@
+# Live Demo
+
+Here is the [link to a live demo](http://muatasim.com/group-worud97/games/) of our games
+
 # group-worud97
 
 **Group 8: Ben Celsi, Catherine Yoo, Ju An Oh, and Muatasim Qazi**
@@ -17,6 +21,6 @@ I will be building a web-based version of a game similar to Parchís called **Lu
 * Animate.css
 
 
-## Tetris – Catherine Yoo
+## A keyboard version of DDR – Catherine Yoo
 ## A mini ping pong game – Ju An Oh
 ## A visually customizable version of "The Game of Life" – Ben Celsi
