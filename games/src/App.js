@@ -5,7 +5,7 @@ import { ROUTES } from './constants';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { indigo500, amberA400 } from 'material-ui/styles/colors';
-import LudoView from './components/Ludo/Ludo';
+import Game from './components/Ludo/Game';
 import GuessingGameView from './components/Guessing/GuessingGame';
 import MainView from './Main'
 import AppBarTop from './AppBarTop';
@@ -31,7 +31,7 @@ class App extends Component {
               <AppBarTop />
               <Container>
               <Switch>
-                <Route exact path={ROUTES.ludo} component={LudoView} />
+                <Route exact path={ROUTES.ludo} component={Game} />
                 <Route path={ROUTES.guessing} component={GuessingGameView} />
                 <Route path={ROUTES.tetris} component={TetrisView} />
                 <Route path={ROUTES.home} component={MainView} />

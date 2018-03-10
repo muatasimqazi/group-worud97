@@ -10,9 +10,6 @@ const styles = {
     border: '1px solid gray',
     borderRadius: '10px',
     fontSize: '80px',
-    // display: 'flex', 
-    // alignItems: 'center', 
-    // justifyContent: 'center',
   },
   dotContainer: {
     padding: '40px',
@@ -76,7 +73,48 @@ export default class DiceRoll extends React.Component {
     super(props);
     this.state = {
       dots: 0,
+      dieValue: 0,
+      player: 'Player',
+      playerNum: 1,
+      play: true,
+      message: "Player 1 turn"
     }
+  }
+  handleRollDice() {
+
+    // get the die number
+    let diceNum = this.rollDice();
+
+    this.setState({
+      play: false,
+      dieValue: diceNum,
+    });
+
+    // wait for the player to move the piece
+    setTimeout(() => this.setState({ play: true }), 3000);
+
+    // unchanged if a player gets 6
+    if (diceNum == 6) {
+      return;
+    }
+    let currentPlayer = this.state.playerNum;
+    if (currentPlayer == 4) {
+      this.setState({
+        playerNum: 1,
+        message: `Player ${1} turn`,
+      })
+    } else {
+      let nextPlayer = this.state.playerNum + 1;
+      this.setState({
+        playerNum: nextPlayer,
+        message: `Player ${nextPlayer} turn`,
+      });
+
+    }
+  }
+
+  rollDice() {
+    return Math.floor(Math.random() * 6) + 1;
   }
 
   render() {
@@ -86,18 +124,26 @@ export default class DiceRoll extends React.Component {
     }
     return (
       <div>
+        {
+          this.props.isGame
+            ?
+            <div>
+              <h4>{this.state.message}</h4>
+              <div style={styles.face}>
 
-        <div style={styles.face}>
-          <div style={styles.dotContainer}>
-            {this.props.dice}
-            {/* {diceDots} */}
-          </div>
-        </div>
-        <div style={styles.button} >
-          <RaisedButton primary={true} label="Roll Dice" onClick={this.props.handleRollDice} disabled={!this.props.playerTurn && this.props.isGame}/>
-        </div>
+                <div style={styles.dotContainer}>
+                  {this.state.dieValue}
+                  {/* {diceDots} */}
+                </div>
+              </div>
+              <div style={styles.button} >
+                <RaisedButton primary={true} label="Roll Dice" onClick={() => this.handleRollDice()} disabled={!this.state.play} />
+              </div>
+            </div>
+            :
+            undefined
+        }
       </div>
     )
   }
-
 }

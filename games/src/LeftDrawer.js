@@ -1,7 +1,6 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import { Menu, MenuItem } from 'material-ui';
-import RaisedButton from 'material-ui/RaisedButton';
 import { Divider } from 'material-ui'
 import { Link } from 'react-router-dom';
 import { ROUTES } from './constants';

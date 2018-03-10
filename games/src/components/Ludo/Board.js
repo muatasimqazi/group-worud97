@@ -1,9 +1,10 @@
 //@ts-check
 import React, { Component } from 'react';
-import { Stage, Layer } from 'react-konva';
+import { Stage, Layer, Group } from 'react-konva';
 import GridView from './Grid';
 import Border from './Border';
 import PlayerBase from './PlayerBase';
+import GamePiece from './GamePiece';
 import CenterSquare from './Center';
 import { indigo500, grey200 } from 'material-ui/styles/colors';
 
@@ -18,6 +19,7 @@ class Board extends Component {
             baseScale: 240,
             scaleIncremnt: 4,
             gridUnit: 40,
+            move: false,
             bases: [
                 {
                     color: '#C20C37',
@@ -47,6 +49,13 @@ class Board extends Component {
         }
     }
 
+    movePiece(evt) {
+        console.log(evt.target)
+        this.setState({ move: true, piece: evt.target.attrs.piece, pieceBase: evt.target.attrs.pieceType, prevX: evt.target.attrs.x, prevY: evt.target.attrs.y });
+        console.log(evt.target.attrs.piece)
+        return evt.target.attrs.piece;
+    }
+
     render() {
         let { isGame, moveX } = this.props;
         let gridSize = GRID_UNIT;
@@ -73,9 +82,23 @@ class Board extends Component {
                 scaleInc={SCALE_INCREMENT}
                 isGame={isGame}
                 moveX={moveX}
+                playerNum={i + 1}
             />
             )
-        })
+        });
+        let gamePieces = [];
+        if (this.props.isGame) {
+            this.state.bases.forEach((base, i) => {
+                gamePieces.push(
+                    <Group key={i}>
+                        <GamePiece x={base.x + BASE_SCALE / 3 + 40} y={base.y + BASE_SCALE / 3 + 40} fill={base.color} pieceType={base.type} isGame={isGame} movePiece={(evt) => this.movePiece(evt)} move={this.state.move} pieceFrom={base.type} piece={1} pieceNum={this.state.piece} pieceBase={this.state.pieceBase} prevX={this.state.prevX} prevY={this.state.prevY} />
+                        <GamePiece x={(base.x + BASE_SCALE) - BASE_SCALE / 6} y={base.y + BASE_SCALE / 3 + 40} fill={base.color} pieceType={base.type} isGame={isGame} movePiece={(evt) => this.movePiece(evt)} move={this.state.move} pieceFrom={base.type} piece={2} pieceNum={this.state.piece} pieceBase={this.state.pieceBase} prevX={this.state.prevX} prevY={this.state.prevY} />
+                        <GamePiece x={base.x + BASE_SCALE / 3 + 40} y={base.y + BASE_SCALE - BASE_SCALE / 6} fill={base.color} pieceType={base.type} isGame={isGame} movePiece={(evt) => this.movePiece(evt)} move={this.state.move} pieceFrom={base.type} piece={3} pieceNum={this.state.piece} pieceBase={this.state.pieceBase} prevX={this.state.prevX} prevY={this.state.prevY} />
+                        <GamePiece x={base.x + BASE_SCALE - BASE_SCALE / 6} y={base.y + BASE_SCALE - BASE_SCALE / 6} fill={base.color} pieceType={base.type} isGame={isGame} movePiece={(evt) => this.movePiece(evt)} move={this.state.move} pieceFrom={base.type} piece={4} pieceNum={this.state.piece} pieceBase={this.state.pieceBase} prevX={this.state.prevX} prevY={this.state.prevY} />
+                    </Group>
+                )
+            });
+        }
         return (
             <Stage width={BASE_SCALE * 3 + 40} height={BASE_SCALE * 3 + 40} style={{ marginLeft: 20, paddingBottom: 20 }}>
                 <Layer>
@@ -86,6 +109,7 @@ class Board extends Component {
                         width={GRID_UNIT}
                         height={GRID_UNIT} />
                     {playerBases}
+                    {gamePieces}
                     <Border x={0} y={0} width={80} height={760} color={grey200} opacity={1} />
                     <Border x={0} y={0} width={760} height={80} color={grey200} opacity={1} />
                     <Border x={680} y={0} width={80} height={760} color={grey200} opacity={1} />

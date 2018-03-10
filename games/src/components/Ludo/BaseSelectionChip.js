@@ -36,7 +36,7 @@ export default class BaseSelectionChip extends React.Component {
 
     handleGameSelection = (key) => {
         this.chipData = this.state.chipData;
-        const chipsToChange = this.chipData.map((chip, i) => {
+        this.chipData.map((chip, i) => {
             key !== i ? chip.newColor = '#e0e0e0' : chip.newColor = chip.color
         })
         this.setState({ chipData: this.state.chipData });

@@ -13,7 +13,6 @@ class StarShape extends Component {
                 fill={color}
                 stroke={stroke}
                 strokeWidth={1}
-                draggable
             />
         );
     }
