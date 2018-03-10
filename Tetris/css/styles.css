@@ -1,78 +1,46 @@
-body {
-	background: #f0f0f0;
+body,
+button { 
+    font-family: 'Orbitron', sans-serif; 
 }
-
-#content,
-button {
-	font-family: 'Orbitron', sans-serif;
-}
-
 #tetris {
-	margin: 1em auto;
-	font-size: 1.25em;
-	width: 450px;
-	display: flex
+    margin: 1em auto;  
+    font-size: 1.25em; 
+    width: 450px; 
+    display: flex
 }
-
-#canvas {
-	display: inline-block;
-	vertical-align: top;
-	border: 1px solid #333;
-	width: 300px;
-	height: 600px;
+#canvas { 
+    display: inline-block; 
+    vertical-align: top; 
+    margin: 10px;
+    border: 1px solid #333; 
+    width: 300px; 
+    height: 600px;
 }
-
-#menu {
-	display: inline-block;
-	vertical-align: top;
-	position: relative;
-	width: 300px;
-	height: 400px;
-}
-
-#menu p {
-	margin: 1 auto;
-	text-align: center;
-}
-
 #start {
-	margin: 0 auto;
-	padding: 10px;
+    font-size: 2em;
 }
-
+#menu { 
+    display: inline-block; 
+    vertical-align: top; 
+    position: relative; 
+    width: 300px; 
+    height: 400px;
+}
+#menu p { 
+    margin: 1 auto; 
+    text-align: center; 
+}
+#start {
+    margin: 0 auto;
+    padding: 10px;
+}
 #text {
-	color: #ff3377;
-	font-weight: bold;
+    color: #ff3377;
+    font-weight: bold;
 }
-
-#score {
-	color: red;
+#score { 
+    color: red; 
 }
-
-#time {
-	color: blue;
+#time { 
+    color: blue; 
 }
-
-nav {
-	background-color: #3f51b5;
-	text-align: left;
-}
-
-nav svg {
-	height: 24px !important;
-	fill: currentColor;
-	margin: 20px 0px 0px 20px !important;
-	cursor: pointer;
-}
-
-nav .brand-logo {
-	font-family: Roboto, sans-serif;
-	font-size: 24px;
-	margin-left: 20px;
-}
-
-.side-nav li>a {
-	font-size: 16px;
-	font-weight: normal;
-}
-
